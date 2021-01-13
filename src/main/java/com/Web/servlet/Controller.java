@@ -5,6 +5,7 @@ import com.Web.command.Locale;
 import com.Web.command.Message;
 import com.Web.command.PagePath;
 import com.Web.command.factory.ActionFactory;
+import com.Web.exception.CommandException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,15 +35,19 @@ public class Controller extends HttpServlet {
         String page;
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
-        page = command.execute(request);
-        if (page != null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            dispatcher.forward(request, response);
-        } else {
-            logger.log(Level.ERROR, Message.NULL_PAGE);
-            page = PagePath.SIGN_IN;
-            request.getSession().setAttribute("nullPage", Message.NULL_PAGE);
-            response.sendRedirect(request.getContextPath() + page);
+        try {
+            page = command.execute(request);
+            if (page != null) {
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+                dispatcher.forward(request, response);
+            } else {
+                logger.log(Level.ERROR, Message.NULL_PAGE);
+                page = PagePath.SIGN_IN;
+                request.getSession().setAttribute("nullPage", Message.NULL_PAGE);
+                response.sendRedirect(request.getContextPath() + page);
+            }
+        } catch (CommandException e) {
+            throw new ServletException(e);
         }
     }
 }
