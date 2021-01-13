@@ -31,7 +31,7 @@
     <div class="mb-3 row">
         <label for="inputPassword" class="col-sm-2 col-form-label textBeforeField">Password</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control field" id="inputPassword" name="password"
+            <input type="password" class="form-control field" id="inputPassword" name="password2"
                    placeholder="Must have at least 4 characters" required
                    pattern="^[A-Za-z0-9_]{4,20}$">
         </div>

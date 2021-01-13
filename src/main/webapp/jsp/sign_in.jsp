@@ -19,90 +19,75 @@
 <body>
 <h2><fmt:message key="login.pageTitle"/></h2>
 <hr style="color:#0d6efd;;" size="5"/>
-<form style="margin-bottom: -50px;" name="signInForm" method="POST" action="controller">
-    <input type="hidden" name="command" value="sign_in"/>
+<div class="container">
+    <form name="signInForm" method="POST" action="controller">
+        <input type="hidden" name="command" value="sign_in"/>
+        <div class="mb-3 row">
+            <label for="inputLogin" style="text-align: center;" class="col-2 offset-5 col-form-label">Login</label>
+        </div>
+        <div class="mb-3 row">
+            <div class="offset-4 col-4">
+                <input type="text" class="form-control field" id="inputLogin" name="login" value="" required
+                       pattern="^[A-Za-zА-яа-я0-9_]{2,20}$">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputPassword" style="text-align: center;"
+                   class="col-2 offset-5 col-form-label">Password</label>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-4 offset-4">
+                <input type="password" class="form-control field" id="inputPassword" name="password2" required
+                       pattern="^[A-Za-z0-9_]{2,20}$">
+            </div>
+        </div>
+        <div class="row">${errorLoginPassMessage}</div>
+        <div class="row">${wrongAction}</div>
+        <div class="row">${nullPage}</div>
+        <div class="mb-3 row">
+            <div class="col-4 offset-4">
+                <button class="btn btn-primary button" type="submit">Sign in</button>
+            </div>
+        </div>
+    </form>
     <div class="mb-3 row">
-        <label for="inputLogin" class="col-sm-2 col-form-label textBeforeField">Login</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control field" id="inputLogin" name="login" value="" required
-                   pattern="^[A-Za-zА-яа-я0-9_]{2,20}$">
+        <div class="col-4 offset-4">
+            <form name="SignUp" method="POST" action="controller">
+                <input type="hidden" name="command" value="redirect_to_sign_up"/>
+                <button class="btn btn-primary button" type="submit">Sign up</button>
+            </form>
         </div>
     </div>
     <div class="mb-3 row">
-        <label for="inputPassword" class="col-sm-2 col-form-label textBeforeField">Password</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control field" id="inputPassword" name="password" required
-                   pattern="^[A-Za-z0-9_]{2,20}$">
+        <div class="col-4 offset-4">
+            <form name="UsersInfoForm" method="POST" action="controller">
+                <input type="hidden" name="command" value="user_info"/>
+                <button class="btn btn-primary button" type="submit">See users</button>
+            </form>
         </div>
     </div>
-    <br/>
-    <p>${errorLoginPassMessage}</p>
-    <br/>
-    <p>${wrongAction}</p>
-    <br/>
-    <p>${nullPage}</p>
-    <br/>
-    <div style="margin-top: -62px;
-    margin-bottom: 66px;" class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary button" type="submit">Sign in</button>
-    </div>
-</form>
+</div>
+<style>
+    body {
+        background-color: rgba(255, 255, 255, 0.60);
+    }
 
-<form name="SignUp" method="POST" action="controller">
-    <input type="hidden" name="command" value="redirect_to_sign_up"/>
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary button" type="submit">Sign up</button>
-    </div>
-</form>
-<form name="UsersInfoForm" method="POST" action="controller">
-    <input type="hidden" name="command" value="user_info"/>
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary button" type="submit">See users</button>
-    </div>
-    <style>
-        body {
-            background-color: rgba(255, 255, 255, 0.60);
-        }
+    p {
+        display: flex;
+        color: red;
+        justify-content: center;
+    }
 
-        p {
-            display: flex;
-            color: red;
-            justify-content: center;
-        }
+    h2 {
+        display: flex;
+        margin-top: 15px;
+        justify-content: center;
+    }
 
-        h2 {
-            display: flex;
-            margin-top: 15px;
-            justify-content: center;
-        }
-
-        .textBeforeField {
-            padding-left: 953px;
-            padding-top: 28px;
-        }
-
-        .field {
-            margin-top: 10px;
-            margin-bottom: -15px;
-            width: 285px;
-            margin-left: 823px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .col-6 {
-            display: flex;
-            justify-content: center;
-            padding-top: 20px
-        }
-
-        .button {
-            margin-left: 15px;
-            display: flex;
-            justify-content: center;
-            width: 237px;
-        }
-    </style>
+    .button {
+        width: 100%;
+    }
+</style>
 </form>
 </body>
 </html>
