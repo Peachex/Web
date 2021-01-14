@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +22,7 @@ public class ConnectionCreator {
             String driverName = (String) properties.get("db.driver");
             Class.forName(driverName);
         } catch (ClassNotFoundException | IOException e) {
-            logger.log(Level.ERROR, "Can't load properties from property file.", e);
+            logger.log(Level.ERROR, e);
         }
         DATABASE_URL = (String) properties.get("db.url");
     }
