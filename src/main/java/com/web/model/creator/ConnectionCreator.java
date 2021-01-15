@@ -14,16 +14,19 @@ public class ConnectionCreator {
     private static final Logger logger = LogManager.getLogger();
     private static final Properties properties = new Properties();
     private static final String DATABASE_URL;
+    private static final String DATABASE_PROPERTY_FILE_PATH = "/data/database.properties";
+    private static final String DATABASE_DRIVER_FIELD = "db.driver";
+    private static final String DATABASE_URL_FIELD = "db.url";
 
     static {
         try {
-            properties.load(ConnectionCreator.class.getResourceAsStream("/data/database.properties"));
-            String driverName = (String) properties.get("db.driver");
+            properties.load(ConnectionCreator.class.getResourceAsStream(DATABASE_PROPERTY_FILE_PATH));
+            String driverName = (String) properties.get(DATABASE_DRIVER_FIELD);
             Class.forName(driverName);
         } catch (ClassNotFoundException | IOException e) {
             logger.log(Level.ERROR, e);
         }
-        DATABASE_URL = (String) properties.get("db.url");
+        DATABASE_URL = (String) properties.get(DATABASE_URL_FIELD);
     }
 
     private ConnectionCreator() {

@@ -15,23 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    private final static String IS_LOGIN_AVAILABLE_STATEMENT = "SELECT login FROM web.users WHERE login = ?;";
-    private final static String CHECK_PASSWORD_STATEMENT = "SELECT password FROM web.users WHERE login = ?;";
-    private final static String SELECT_ALL_LOGINS_STATEMENT = "SELECT login FROM web.users;";
+    private final static String IS_LOGIN_AVAILABLE_QUERY = "SELECT login FROM web.users WHERE login = ?;";
+    private final static String CHECK_PASSWORD_QUERY = "SELECT password FROM web.users WHERE login = ?;";
+    private final static String SELECT_ALL_LOGINS_QUERY = "SELECT login FROM web.users;";
     private final static String ADD_USER_SQL_QUERY = "INSERT INTO users (login, password) VALUES (?,?);";
 
     @Override
     public boolean containsLogin(String login) throws DaoException {
         boolean result = false;
         try (Connection connection = ConnectionCreator.createConnection()) {
-            PreparedStatement statement = connection.prepareStatement(IS_LOGIN_AVAILABLE_STATEMENT);
+            PreparedStatement statement = connection.prepareStatement(IS_LOGIN_AVAILABLE_QUERY);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 result = true;
             }
         } catch (SQLException e) {
-            throw new DaoException(e.getMessage());
+            throw new DaoException(e);
         }
         return result;
     }
@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean checkPassword(String login, String password) throws DaoException {
         try (Connection connection = ConnectionCreator.createConnection()) {
-            PreparedStatement statement = connection.prepareStatement(CHECK_PASSWORD_STATEMENT);
+            PreparedStatement statement = connection.prepareStatement(CHECK_PASSWORD_QUERY);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()) {
@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
                 return false;
             }
         } catch (SQLException e) {
-            throw new DaoException(e.getMessage());
+            throw new DaoException(e);
         }
     }
 
@@ -58,14 +58,14 @@ public class UserDaoImpl implements UserDao {
         List<User> users = new ArrayList<>();
         try (Connection connection = ConnectionCreator.createConnection()) {
             Statement statement = connection.createStatement();
-            statement.executeQuery(SELECT_ALL_LOGINS_STATEMENT);
+            statement.executeQuery(SELECT_ALL_LOGINS_QUERY);
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 String login = resultSet.getString(1);
                 users.add(new User(login));
             }
         } catch (SQLException e) {
-            throw new DaoException(e.getMessage());
+            throw new DaoException(e);
         }
         return users;
     }
@@ -80,7 +80,7 @@ public class UserDaoImpl implements UserDao {
                 throw new DaoException("Row wasn't inserted");
             }
         } catch (SQLException e) {
-            throw new DaoException(e.getMessage());
+            throw new DaoException(e);
         }
     }
 }

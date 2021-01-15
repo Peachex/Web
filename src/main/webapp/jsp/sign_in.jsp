@@ -15,9 +15,9 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title><fmt:message key="login.pageTitle"/></title></head>
+    <title><fmt:message key="sign_in.pageTitle"/></title></head>
 <body>
-<h2><fmt:message key="login.pageTitle"/></h2>
+<h2><fmt:message key="sign_in.pageTitle"/></h2>
 <hr style="color:#0d6efd;;" size="5"/>
 <div class="container">
     <form name="signInForm" method="POST" action="controller">

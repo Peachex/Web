@@ -3,7 +3,7 @@ package com.web.command.factory;
 import com.web.command.ActionCommand;
 import com.web.command.Message;
 import com.web.command.client.CommandEnum;
-import com.web.command.impl.EmptyCommand;
+import com.web.command.impl.DefaultCommand;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +14,7 @@ public class ActionFactory {
     private static final Logger logger = LogManager.getLogger();
 
     public ActionCommand defineCommand(HttpServletRequest request) {
-        ActionCommand current = new EmptyCommand();
+        ActionCommand current = new DefaultCommand();
         String action = request.getParameter("command");
         if (action == null || action.isEmpty()) {
             return current;

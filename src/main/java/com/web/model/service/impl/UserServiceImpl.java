@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
                 logger.log(Level.ERROR, Message.LOGIN_ERROR);
             }
         } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
         return result;
     }
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         try {
             result = userDao.containsLogin(login);
         } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
         return result;
     }
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
                 result = userDao.checkPassword(enterLogin, enterPassword);
             }
         } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
         return result;
     }
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
         try {
             users = new ArrayList<>(userDao.getAllLogins());
         } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
         return users;
     }

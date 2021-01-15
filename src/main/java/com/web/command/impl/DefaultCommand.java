@@ -5,7 +5,7 @@ import com.web.command.PagePath;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class EmptyCommand implements ActionCommand {
+public class DefaultCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {

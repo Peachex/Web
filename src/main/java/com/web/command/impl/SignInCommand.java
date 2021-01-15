@@ -32,7 +32,7 @@ public class SignInCommand implements ActionCommand {
                 page = PagePath.SIGN_IN;
             }
         } catch (ServiceException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(e);
         }
         return page;
     }

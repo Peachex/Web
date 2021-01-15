@@ -19,7 +19,7 @@ public class UserInfoCommand implements ActionCommand {
         try {
             names = new ArrayList<>(service.getNames());
         } catch (ServiceException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(e);
         }
         request.setAttribute("users", names);
         String page = PagePath.INFO;

@@ -36,7 +36,7 @@ public class SignUpCommand implements ActionCommand {
                 page = PagePath.SIGN_UP;
             }
         } catch (ServiceException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(e);
         }
         return page;
     }
