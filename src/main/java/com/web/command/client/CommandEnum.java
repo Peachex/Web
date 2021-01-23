@@ -1,6 +1,7 @@
 package com.web.command.client;
 
 import com.web.command.ActionCommand;
+import com.web.command.impl.ChangeLanguageCommand;
 import com.web.command.impl.UserInfoCommand;
 import com.web.command.impl.RedirectToSignUpCommand;
 import com.web.command.impl.SignInCommand;
@@ -26,6 +27,9 @@ public enum CommandEnum {
     }},
     REDIRECT_TO_SIGN_UP {{
         this.command = new RedirectToSignUpCommand();
+    }},
+    CHANGE_LANGUAGE {{
+        this.command = new ChangeLanguageCommand();
     }};
 
     ActionCommand command;

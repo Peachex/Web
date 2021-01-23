@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${currentLocale}"/>
+<fmt:setBundle basename="locale.page_content"/>
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,12 +18,13 @@
 </head>
 <body>
 
-<h2>Sign up:</h2>
+<h2><fmt:message key="sign_up.pageTitle"/></h2>
 <hr style="color:#0d6efd;;" size="5"/>
 <form name="signUpForm" method="POST" action="controller">
     <input type="hidden" name="command" value="sign_up"/>
     <div class="mb-3 row">
-        <label for="inputLogin" class="col-sm-2 col-form-label textBeforeField">Login</label>
+        <label for="inputLogin" class="col-sm-2 col-form-label textBeforeField"><fmt:message
+                key="sign_in.loginMessage"/></label>
         <div class="col-sm-10">
             <input type="text" class="form-control field" id="inputLogin" name="login"
                    placeholder="Must have at least 2 characters" required
@@ -27,9 +32,10 @@
         </div>
     </div>
     <p>${errorLoginName}</p>
-    <g>Proper format: john_25</g>
+    <g>Proper format: <fmt:message key="sign_up.properLoginFormat"/></g>
     <div class="mb-3 row">
-        <label for="inputPassword" class="col-sm-2 col-form-label textBeforeField">Password</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label textBeforeField"><fmt:message
+                key="sign_in.passwordMessage"/></label>
         <div class="col-sm-10">
             <input type="password" class="form-control field" id="inputPassword" name="password2"
                    placeholder="Must have at least 4 characters" required
@@ -38,7 +44,8 @@
     </div>
     <c>Proper format: 1j2o3h4n5_25</c>
     <div class="mb-3 row">
-        <label for="inputPassword" class="col-sm-2 col-form-label textBeforeField">Repeat password</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label textBeforeField"><fmt:message
+                key="sign_up.repeatPasswordMessage"/> </label>
         <div class="col-sm-10">
             <input type="password" class="form-control field" id="repeatPassword" name="rePassword"
                    required
@@ -49,13 +56,13 @@
     <br/>
     <div style="margin-top: -62px;
     margin-bottom: 66px;" class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary button" type="submit">Sign up</button>
+        <button class="btn btn-primary button" type="submit"><fmt:message key="button.sign_up"/></button>
     </div>
 </form>
 <form name="SignIn" method="POST" action="controller">
     <input type="hidden" name="command" value="redirect_to_sign_in"/>
     <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary button" type="submit">Back</button>
+        <button class="btn btn-primary button" type="submit"><fmt:message key="button.back"/></button>
     </div>
 </form>
 <style>

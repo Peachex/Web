@@ -23,8 +23,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean containsLogin(String login) throws DaoException {
         boolean result = false;
-        try (Connection connection = ConnectionCreator.createConnection()) {
-            PreparedStatement statement = connection.prepareStatement(IS_LOGIN_AVAILABLE_QUERY);
+        try (Connection connection = ConnectionCreator.createConnection();
+             PreparedStatement statement = connection.prepareStatement(IS_LOGIN_AVAILABLE_QUERY)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -38,11 +38,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean checkPassword(String login, String password) throws DaoException {
-        try (Connection connection = ConnectionCreator.createConnection()) {
-            PreparedStatement statement = connection.prepareStatement(CHECK_PASSWORD_QUERY);
+        try (Connection connection = ConnectionCreator.createConnection();
+             PreparedStatement statement = connection.prepareStatement(CHECK_PASSWORD_QUERY)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 String passwordFromDatabase = resultSet.getString(1);
                 return Encryptor.check(password, passwordFromDatabase);
             } else {
@@ -56,8 +56,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllLogins() throws DaoException {
         List<User> users = new ArrayList<>();
-        try (Connection connection = ConnectionCreator.createConnection()) {
-            Statement statement = connection.createStatement();
+        try (Connection connection = ConnectionCreator.createConnection();
+             Statement statement = connection.createStatement()) {
             statement.executeQuery(SELECT_ALL_LOGINS_QUERY);
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) {

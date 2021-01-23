@@ -6,19 +6,23 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${currentLocale}"/>
+<fmt:setBundle basename="locale.page_content"/>
 <html>
 <head>
-    <title>Users Info</title>
+    <title>Users info</title>
 </head>
 <body>
-<h2>Users info:</h2>
+<h2><fmt:message key="info.pageTitle"/></h2>
 <hr style="color:#0d6efd;;" size="5"/>
 <p>${users}</p>
 <hr style="color:#0d6efd;;" size="5"/>
 <form name="signIn" method="POST" action="controller">
     <input type="hidden" name="command" value="redirect_to_sign_in"/>
     <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary button" type="submit">Back</button>
+        <button class="btn btn-primary button" type="submit"><fmt:message key="button.back"/></button>
     </div>
 </form>
 <style>
