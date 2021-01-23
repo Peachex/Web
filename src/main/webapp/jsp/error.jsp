@@ -51,7 +51,6 @@
         </div>
     </div>
 </div>
-</div>
 <style>
     body {
         background-color: rgba(255, 255, 255, 0.60);

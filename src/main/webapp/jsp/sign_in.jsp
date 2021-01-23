@@ -50,13 +50,13 @@
         <div class="mb-3 row ">${wrongAction}</div>
         <div class="mb-3 row ">${nullPage}</div>
         <div class="mb-3 row">
-            <div class="col-4 offset-4">
+            <div class="col-4 offset-5">
                 <button class="btn btn-primary button" type="submit"><fmt:message key="button.sign_in"/></button>
             </div>
         </div>
     </form>
     <div class="mb-3 row">
-        <div class="col-4 offset-4">
+        <div class="col-4 offset-5">
             <form name="SignUp" method="POST" action="controller">
                 <input type="hidden" name="command" value="redirect_to_sign_up"/>
                 <button class="btn btn-primary button" type="submit"><fmt:message key="button.sign_up"/></button>
@@ -64,21 +64,14 @@
         </div>
     </div>
     <div class="mb-3 row">
-        <div class="col-4 offset-4">
+        <div class="col-4 offset-5">
             <form name="UsersInfoForm" method="POST" action="controller">
                 <input type="hidden" name="command" value="user_info"/>
                 <button class="btn btn-primary button" type="submit"><fmt:message key="button.seeUsers"/></button>
             </form>
         </div>
     </div>
-    <div class="mb-3 row">
-        <div class="col-4 offset-4">
-            <form name="UsersInfoForm" method="POST" action="controller">
-                <input type="hidden" name="command" value="change_language"/>
-                <button class="btn btn-primary button" type="submit"><fmt:message key="button.changeLanguage"/></button>
-            </form>
-        </div>
-    </div>
+    <c:import url="change_language.jsp"/>
 </div>
 <style>
     body {
@@ -98,7 +91,7 @@
     }
 
     .button {
-        width: 100%;
+        width: 50%;
     }
 </style>
 </form>

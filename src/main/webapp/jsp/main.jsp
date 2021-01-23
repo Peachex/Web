@@ -25,9 +25,10 @@
 <form name="logout" method="POST" action="controller">
     <input type="hidden" name="command" value="logout"/>
     <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary button" type="submit"><fmt:message key="button.logout"/></button>
+        <button class="btn btn-primary button" style="margin-left: 70px" type="submit"><fmt:message key="button.logout"/></button>
     </div>
 </form>
+<c:import url="change_language.jsp"/>
 <style>
     body {
         background-color: rgba(255, 255, 255, 0.60);
@@ -62,7 +63,7 @@
 
     .button {
         margin-block: 30px;
-        margin-bottom: -150px;
+        margin-bottom: -100px;
         margin-top: 110px;
         margin-left: 15px;
         display: flex;
