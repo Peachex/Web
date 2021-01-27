@@ -35,7 +35,7 @@
             </form>
         </div>
     </div>
-    <c:import url="change_language.jsp"/>
+    <%@include file="change_language.jsp"%>
 </div>
 <style>
     body {

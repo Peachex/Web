@@ -1,11 +1,12 @@
 package com.web.servlet;
 
 import com.web.command.ActionCommand;
-import com.web.command.Locale;
 import com.web.command.Message;
 import com.web.command.PagePath;
 import com.web.command.factory.ActionFactory;
 import com.web.exception.CommandException;
+import com.web.exception.ConnectionPoolException;
+import com.web.model.pool.ConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,6 +48,15 @@ public class Controller extends HttpServlet {
             }
         } catch (CommandException e) {
             throw new ServletException(e);
+        }
+    }
+
+    @Override
+    public void destroy() {
+        try {
+            ConnectionPool.POOL.destroyPool();
+        } catch (ConnectionPoolException e) {
+            logger.log(Level.ERROR, e);
         }
     }
 }

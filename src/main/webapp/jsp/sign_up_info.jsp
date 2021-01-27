@@ -27,7 +27,7 @@
         <button class="btn btn-primary button" type="submit"><fmt:message key="button.back"/></button>
     </div>
 </form>
-<c:import url="change_language.jsp"/>
+<%--<%@include file="change_language.jsp"%>--%>
 <style>
     body {
         background-color: rgba(255, 255, 255, 0.60);
