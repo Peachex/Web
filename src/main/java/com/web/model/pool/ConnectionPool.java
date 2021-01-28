@@ -16,7 +16,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public enum ConnectionPool {
     POOL;
-    private final Logger logger = LogManager.getLogger(); //fixme (non-static logger)
+    private final Logger logger = LogManager.getLogger();
     public static final int POOL_SIZE = 5;
     private final BlockingQueue<Connection> freeConnections;
     private final Queue<Connection> givenConnections;

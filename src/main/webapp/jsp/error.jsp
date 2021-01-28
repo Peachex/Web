@@ -71,6 +71,8 @@
     }
 
     .button {
+        display: flex;
+        justify-content: center;
         width: 50%;
     }
 </style>
