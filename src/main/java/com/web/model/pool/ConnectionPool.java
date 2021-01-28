@@ -26,7 +26,6 @@ public enum ConnectionPool {
         givenConnections = new ArrayDeque<>();
         try {
             for (int i = 0; i < POOL_SIZE; i++) {
-                //todo (proxy connection)
                 Connection connection = ConnectionCreator.createConnection();
                 freeConnections.add(connection);
             }
