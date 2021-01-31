@@ -25,10 +25,19 @@
 <form name="logout" method="POST" action="controller">
     <input type="hidden" name="command" value="logout"/>
     <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary button" style="margin-left: 70px" type="submit"><fmt:message key="button.logout"/></button>
+        <button class="btn btn-primary button" style="margin-left: 70px" type="submit"><fmt:message
+                key="button.logout"/></button>
     </div>
 </form>
-<%@include file="../jsp/change_language.jsp"%>
+<%@include file="../jsp/change_language.jsp" %>
+<div class="mb-5 row">
+    <div class="col-4 offset-1">
+        <FORM action="upload" enctype="multipart/form-data" method="POST">
+            Upload File: <INPUT type="file" name="content" height="130">
+            <INPUT type="submit" value="Upload File">
+        </FORM>
+    </div>
+</div>
 <style>
     body {
         background-color: rgba(255, 255, 255, 0.60);
