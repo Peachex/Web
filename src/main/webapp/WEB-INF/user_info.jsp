@@ -35,7 +35,7 @@
             </form>
         </div>
     </div>
-    <%@include file="change_language.jsp"%>
+    <%@include file="../jsp/change_language.jsp"%>
 </div>
 <style>
     body {

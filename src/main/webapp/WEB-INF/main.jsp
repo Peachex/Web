@@ -28,7 +28,7 @@
         <button class="btn btn-primary button" style="margin-left: 70px" type="submit"><fmt:message key="button.logout"/></button>
     </div>
 </form>
-<%@include file="change_language.jsp"%>
+<%@include file="../jsp/change_language.jsp"%>
 <style>
     body {
         background-color: rgba(255, 255, 255, 0.60);
