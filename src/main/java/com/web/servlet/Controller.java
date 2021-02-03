@@ -23,6 +23,10 @@ import java.io.IOException;
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
 
+    @Override
+    public void init() {
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }

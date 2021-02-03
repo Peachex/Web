@@ -2,7 +2,7 @@ package com.web.model.dao.impl;
 
 import com.web.exception.ConnectionPoolException;
 import com.web.exception.DaoException;
-import com.web.model.dao.CloseableDao;
+import com.web.model.dao.BaseDao;
 import com.web.model.dao.UserDao;
 import com.web.model.entity.User;
 import com.web.model.pool.ConnectionPool;
@@ -16,7 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao, CloseableDao {
+public class UserDaoImpl implements UserDao, BaseDao {
     private static final ConnectionPool pool = ConnectionPool.POOL;
     private final static String IS_LOGIN_AVAILABLE_QUERY = "SELECT login FROM web.users WHERE login = ?;";
     private final static String CHECK_PASSWORD_QUERY = "SELECT password FROM web.users WHERE login = ?;";

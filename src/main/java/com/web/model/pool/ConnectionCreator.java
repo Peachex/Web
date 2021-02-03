@@ -17,6 +17,8 @@ public class ConnectionCreator {
     private static final String DATABASE_PROPERTY_FILE_PATH = "/data/database.properties";
     private static final String DATABASE_DRIVER_FIELD = "db.driver";
     private static final String DATABASE_URL_FIELD = "db.url";
+    private static final String DATABASE_POOL_SIZE_FIELD = "pool.size";
+    private static final String POOL_SIZE;
 
     static {
         try {
@@ -27,10 +29,15 @@ public class ConnectionCreator {
             logger.log(Level.ERROR, e);
         }
         DATABASE_URL = (String) properties.get(DATABASE_URL_FIELD);
+        POOL_SIZE = (String) properties.get(DATABASE_POOL_SIZE_FIELD);
     }
 
     private ConnectionCreator() {
 
+    }
+
+    public static String getPoolSize() {
+        return POOL_SIZE;
     }
 
     public static Connection createConnection() throws SQLException {

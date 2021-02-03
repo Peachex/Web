@@ -16,27 +16,45 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public enum ConnectionPool {
     POOL;
+    public static final int DEFAULT_POOL_SIZE = 10;
+    public static final int FATAL_CONNECTION_ERROR_NUMBER = 5;
     private final Logger logger = LogManager.getLogger();
-    public static final int POOL_SIZE = 5;
-    private final BlockingQueue<Connection> freeConnections;
-    private final Queue<Connection> givenConnections;
+    private final BlockingQueue<ProxyConnection> freeConnections;
+    private final Queue<ProxyConnection> givenConnections;
 
     ConnectionPool() {
         freeConnections = new LinkedBlockingDeque<>();
         givenConnections = new ArrayDeque<>();
+        int errorCounter = 0;
+        int poolSize;
         try {
-            for (int i = 0; i < POOL_SIZE; i++) {
+            poolSize = Integer.parseInt(ConnectionCreator.getPoolSize());
+        } catch (NumberFormatException e) {
+            logger.log(Level.ERROR, e);
+            poolSize = DEFAULT_POOL_SIZE;
+        }
+        for (int i = 0; i < poolSize; i++) {
+            try {
                 Connection connection = ConnectionCreator.createConnection();
-                freeConnections.add(connection);
+                ProxyConnection proxyConnection = new ProxyConnection(connection);
+                freeConnections.add(proxyConnection);
+            } catch (SQLException e) {
+                logger.log(Level.ERROR, e);
+                errorCounter++;
             }
-        } catch (SQLException e) {
-            logger.log(Level.FATAL, e);
-            throw new RuntimeException(e);
+        }
+        if (errorCounter >= FATAL_CONNECTION_ERROR_NUMBER) {
+            logger.log(Level.FATAL, errorCounter + " connections hasn't been created");
+            throw new RuntimeException(errorCounter + " connections hasn't been created");
         }
     }
 
+    public void init() {
+
+    }
+
     public Connection takeConnection() throws ConnectionPoolException {
-        Connection connection;
+        ProxyConnection connection;
         try {
             connection = freeConnections.take();
             givenConnections.offer(connection);
@@ -46,19 +64,19 @@ public enum ConnectionPool {
         return connection;
     }
 
-    public void releaseConnection(Connection connection) throws ConnectionPoolException {
-        if (givenConnections.remove(connection)) {
-            freeConnections.offer(connection);
+    public void releaseConnection(Connection connection) {
+        if (connection instanceof ProxyConnection && givenConnections.remove(connection)) {
+            freeConnections.offer((ProxyConnection) connection);
         } else {
-            throw new ConnectionPoolException("Couldn't release connection!");
+            logger.log(Level.ERROR, "Couldn't release connection");
         }
     }
 
     public void destroyPool() throws ConnectionPoolException {
         try {
-            for (int i = 0; i < POOL_SIZE; i++) {
-                Connection connection = freeConnections.take();
-                connection.close();
+            for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
+                ProxyConnection proxyConnection = freeConnections.take();
+                proxyConnection.reallyClose();
             }
         } catch (InterruptedException | SQLException e) {
             throw new ConnectionPoolException(e);

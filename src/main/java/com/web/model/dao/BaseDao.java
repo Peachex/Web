@@ -1,7 +1,5 @@
 package com.web.model.dao;
 
-import com.web.exception.ConnectionPoolException;
-import com.web.model.pool.ConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public interface CloseableDao {
+public interface BaseDao {
     Logger logger = LogManager.getLogger();
 
     default void close(Statement statement) {
@@ -26,8 +24,9 @@ public interface CloseableDao {
     default void close(Connection connection) {
         if (connection != null) {
             try {
-                ConnectionPool.POOL.releaseConnection(connection);
-            } catch (ConnectionPoolException e) {
+                connection.setAutoCommit(true);
+                connection.close();
+            } catch (SQLException e) {
                 logger.log(Level.ERROR, e);
             }
         }
